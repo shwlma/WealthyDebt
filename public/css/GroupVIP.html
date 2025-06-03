@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching Sessions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #006400; /* Dark Green for CTA */
+            --accent-gold: #DAA520;   /* Goldenrod for accents */
+            --light-gold-bg: #FFF8DC; /* Cornsilk - very light gold for BG */
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #f8f9fa;
+            --text-grey: #555555;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--white); /* Default white background */
+            transition: background-color 0.5s ease-in-out; /* Transition for body background */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #004d00 100%); /* Green gradient */
+            color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px; /* Adjust as needed */
+            margin-right: 20px;
+            border-radius: 50%; /* Optional: if your logo is circular */
+            border: 2px solid var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        header h1 {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        /* --- Session Sections --- */
+        .session-section {
+            padding: 60px 0;
+            transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .session-section:nth-child(odd) { /* First section gets light gold */
+            background-color: var(--light-gold-bg);
+        }
+        .session-section:nth-child(even) { /* Second section gets white */
+            background-color: var(--white);
+            border-top: 5px solid var(--primary-green); /* Green accent */
+        }
+
+
+        .session-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .session-intro h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5em;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        .session-section.gold-bg .session-intro h2 { /* Slightly different for gold bg */
+            color: #8B4513; /* SaddleBrown - a darker gold/brown */
+        }
+
+
+        .price-tag {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-top: 5px;
+        }
+        .duration {
+            font-size: 0.9em;
+            font-weight: normal;
+            color: var(--text-grey);
+        }
+
+        .session-section h3 { /* Headline */
+            font-family: var(--font-heading);
+            font-size: 2em;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subheadline {
+            font-size: 1.2em;
+            color: var(--text-grey);
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .content-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5); /* Slight transparency if on colored bg */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .session-section.gold-bg .content-block {
+            background-color: rgba(255, 255, 255, 0.7); /* More opaque on gold bg */
+        }
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+
+        .content-block h4 {
+            font-family: var(--font-heading);
+            font-size: 1.5em;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .content-block p, .content-block ul {
+            margin-bottom: 15px;
+            color: var(--text-grey);
+        }
+        .content-block ul {
+            list-style-type: none; /* Remove default bullets */
+            padding-left: 0;
+        }
+        .content-block ul li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .content-block ul li::before {
+            content: "✓"; /* Checkmark */
+            color: var(--accent-gold);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: transform 0.2s ease;
+        }
+        .content-block ul li:hover::before {
+            transform: scale(1.3);
+        }
+
+        .content-block ul ul { /* Nested list */
+            margin-top: 10px;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        .content-block ul ul li::before {
+            content: "›"; /* Arrow for sub-items */
+            color: var(--primary-green);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 40px auto;
+            width: 80%;
+        }
+
+        .testimonial {
+            font-style: italic;
+            color: var(--text-grey);
+            padding: 15px 20px;
+            border-left: 4px solid var(--accent-gold);
+            background-color: #f9f9f9;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            position: relative;
+        }
+        .testimonial::before {
+            content: '“';
+            font-size: 3em;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            position: absolute;
+            left: 10px;
+            top: -10px;
+        }
+
+
+        /* --- CTA Area & Buttons --- */
+        .cta-area {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        .session-section.gold-bg .cta-area { /* On gold bg, make CTA area pop more */
+             background-color: var(--white);
+        }
+
+
+        .emphasis {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px; /* Pill shape */
+            margin: 20px 5px 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-cta { /* Green button */
+            background-color: var(--primary-green);
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(0, 100, 0, 0.3);
+        }
+        .primary-cta:hover {
+            background-color: #004d00; /* Darker green */
+            color: var(--white);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 100, 0, 0.4);
+        }
+
+        .gold-cta { /* Gold button */
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+            box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+        }
+        .gold-cta:hover {
+            background-color: #B8860B; /* Darker gold */
+            color: var(--white);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(218, 165, 32, 0.4);
+        }
+
+        .stripe-info {
+            font-size: 0.9em;
+            color: var(--text-grey);
+            margin-top: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+            .logo {
+                height: 40px;
+            }
+
+            .session-intro h2 {
+                font-size: 2em;
+            }
+            .session-section h3 {
+                font-size: 1.6em;
+            }
+            .subheadline {
+                font-size: 1.1em;
+            }
+
+            .content-block h4 {
+                font-size: 1.3em;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+                width: 90%; /* Make buttons full-width on small screens */
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+            .logo {
+                height: 35px;
+                margin-right: 10px;
+            }
+
+            .session-intro h2 {
+                font-size: 1.8em;
+            }
+             .session-section h3 {
+                font-size: 1.4em;
+            }
+            .content-block {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <!-- IMPORTANT: Replace "your-logo.png" with the actual path or URL to your logo image -->
+            <img src="C:\Users\SHEILMAE\WealthyDebt\public\css\F.R.E.D. LOGO-02.jpg" alt="C:\Users\SHEILMAE\WealthyDebt\public\css\F.R.E.D. LOGO-02.jpg" class="logo">
+            <h1>Expert Financial Guidance</h1>
+        </div>
+    </header>
+
+    <main>
+        <section id="group-vip" class="session-section gold-bg">
+            <div class="container">
+                <div class="session-intro">
+                    <h2>Group Session — Breakthroughs in Good Company</h2>
+                    <p class="price-tag">Group VIP: $175</p>
+                </div>
+                
+                <h3>Learn in Community. Move in Confidence.</h3>
+                <p class="subheadline">A live, small-group coaching experience focused on execution and elevation.</p>
+
+                <div class="content-block">
+                    <h4>What This Is:</h4>
+                    <p>This is your chance to experience strategic guidance from a financial expert — at a lower investment — in a high-impact group setting.</p>
+                    <p>You’ll get the same depth of insight offered in our $350 SPARC Session, but in a shared space where you’ll learn from real-time questions, guided teaching, and your own self-reflection.</p>
+                    <p><strong>This is not a coaching circle.</strong></p>
+                    <p>This is a focused, fast-moving, strategy-packed hour designed to help you shift your mindset, identify opportunity, and take smart financial action — especially for your business.</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>What You’ll Gain:</h4>
+                    <ul>
+                        <li>A breakdown of the Wealthy Debt™ Framework — and how to use it to strengthen your financial foundation</li>
+                        <li>A new lens on how your current business income, debt, or gaps can actually be leveraged</li>
+                        <li>Insight into how tools like life insurance, business structuring, and trust planning apply to your stage of growth</li>
+                        <li>Live clarity prompts to reflect on your own situation — even without one-on-one time</li>
+                    </ul>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>What You Leave With:</h4>
+                    <ul>
+                        <li>7-day replay access of the session</li>
+                        <li>A custom Strategic Wealth Action Plan sent to your inbox the next business day, which includes:
+                            <ul>
+                                <li>Personalized notes based on your session input</li>
+                                <li>Suggested financial strategies for your business</li>
+                                <li>Insight prompts to help you take action</li>
+                                <li>Next-step recommendations to build momentum from the session</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>Why This Makes Sense:</h4>
+                    <p>Less than a private session — but guided by the same strategy principles</p>
+                    <p>A perfect starting point if you’re not ready for VIP Day or SPARC</p>
+                    <p>Designed to help you take smarter steps with your business income and financial structure</p>
+                    <blockquote class="testimonial">
+                        “I left with ideas I’d never considered — and a strategy that makes sense for where I am right now.”
+                    </blockquote>
+                </div>
+                
+                <div class="cta-area">
+                    <p class="emphasis">This session is bite-sized, bold, and business-aware.</p>
+                    <p>Seats are limited to keep the energy intimate — and the takeaways powerful.</p>
+                    <!-- IMPORTANT: Replace #YOUR_STRIPE_LINK_GROUP_VIP with your actual Stripe payment link -->
+                    <a href="https://buy.stripe.com/test_9B66oJ1En2Oh9jLeDN14403" class="cta-button primary-cta">Enroll in Group VIP ($175)</a>
+                    <p class="stripe-info">(Secure Payment via Stripe)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="consulting-session" class="session-section white-bg"> <!-- Note: was .session-section:nth-child(even), now explicit class for clarity if sections reorder -->
+            <div class="container">
+                <div class="session-intro">
+                    <h2>Consulting Session — Real Answers. Real Fast.</h2>
+                    <p class="price-tag">Price: $150 <span class="duration">(Duration: 45 minutes - Live on Zoom)</span></p>
+                </div>
+
+                <div class="content-block">
+                    <h4>What This Is:</h4>
+                    <p>You’re not looking for a course. You’re not here to waste time.</p>
+                    <p>You’ve got a goal, a challenge, or a few smart questions — and you need answers now.</p>
+                    <p>This 45-minute Consulting Session is a focused, fast-paced strategy call designed to cut through confusion and give you direction. Whether you’re building a business, launching a new idea, or just trying to make smarter moves, this is your window to clarity.</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>What We Might Cover:</h4>
+                    <p>Every session is personalized. Common consulting topics include:</p>
+                    <ul>
+                        <li>How to properly register your business (LLC, S-Corp, Sole Prop — we’ll break it down)</li>
+                        <li>Creating your first digital product or offer</li>
+                        <li>Pricing and packaging your services so you’re not undercharging</li>
+                        <li>How to find your ideal clients and stop spinning your wheels</li>
+                        <li>Simple branding tips to make you look like a pro, even on a budget</li>
+                        <li>Cleaning up your financial structure so business and personal aren’t mixed</li>
+                        <li>Business tools or systems you need — and which ones you don’t</li>
+                    </ul>
+                    <p>You bring the question or the challenge — I’ll bring the solution and a few next moves.</p>
+                </div>
+                
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>What You Leave With:</h4>
+                    <ul>
+                        <li>A clear understanding of what to focus on first</li>
+                        <li>Practical guidance you can act on immediately</li>
+                        <li>A renewed sense of direction — no more spinning your wheels</li>
+                        <li>Encouraged to take notes — because we won’t be sending a recording</li>
+                    </ul>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="content-block">
+                    <h4>Why It’s Worth It:</h4>
+                    <p>You get real feedback, not fluff</p>
+                    <p>You avoid costly beginner mistakes</p>
+                    <p>You leave with a focused mind and a mapped-out next step</p>
+                    <blockquote class="testimonial">
+                        “I didn’t need a course. I needed someone to help me stop overthinking and just take action. This 45-minute session changed everything.”
+                    </blockquote>
+                </div>
+
+                <div class="cta-area">
+                    <p class="emphasis">No Recordings. No Replays.</p>
+                    <p>This session is live, confidential, and built for those who show up.<br>
+                    To protect your privacy — and my future programs — the session will not be recorded or replayed.</p>
+                     <!-- IMPORTANT: Replace #YOUR_STRIPE_LINK_CONSULTING with your actual Stripe payment link -->
+                    <a href="https://buy.stripe.com/test_7sY7sN6YH0G967zbrB14404" class="cta-button gold-cta">Book Consulting Session ($150)</a>
+                    <p class="stripe-info">(Secure Payment via Stripe)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <!-- IMPORTANT: Replace "Your Company Name" with your actual company name -->
+            <p>© 2024 FRED Financial Services. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
